@@ -1,33 +1,99 @@
-export const pizzaType = {
-  ["Тонкое"]: "light",
-  ["Толстое"]: "large",
-};
+export const PIZZA_DOUGH_OPTIONS = [
+  {
+    name: "Тонкое",
+    value: "light",
+  },
+  {
+    name: "Толстое",
+    value: "large",
+  },
+];
 
-export const pizzaSize = {
-  ["23 см"]: "small",
-  ["32 см"]: "normal",
-  ["45 см"]: "big",
-};
+export const PIZZA_SIZES = [
+  {
+    name: "23 см",
+    value: "small",
+  },
+  {
+    name: "32 см",
+    value: "normal",
+  },
+  {
+    name: "45 см",
+    value: "big",
+  },
+];
 
-export const pizzaSauces = {
-  ["Томатный"]: "tomato",
-  ["Сливочный"]: "creamy",
-};
+export const PIZZA_SAUCES = [
+  {
+    name: "Томатный",
+    value: "tomato",
+  },
+  {
+    name: "Сливочный",
+    value: "creamy",
+  },
+];
 
-export const pizzaIngredients = {
-  ["Грибы"]: "mushrooms",
-  ["Чеддер"]: "cheddar",
-  ["Салями"]: "salami",
-  ["Ветчина"]: "ham",
-  ["Ананас"]: "ananas",
-  ["Бекон"]: "bacon",
-  ["Лук"]: "onion",
-  ["Чили"]: "chile",
-  ["Халапеньо"]: "jalapeno",
-  ["Маслины"]: "olives",
-  ["Томаты"]: "tomatoes",
-  ["Лосось"]: "salmon",
-  ["Моцарелла"]: "mozzarella",
-  ["Пармезан"]: "parmesan",
-  ["Блю чиз"]: "blue_cheese",
-};
+export const PIZZA_INGREDIENTS = [
+  {
+    name: "Грибы",
+    value: "mushrooms",
+  },
+  {
+    name: "Чеддер",
+    value: "cheddar",
+  },
+  {
+    name: "Салями",
+    value: "salami",
+  },
+  {
+    name: "Ветчина",
+    value: "ham",
+  },
+  {
+    name: "Ананас",
+    value: "ananas",
+  },
+  {
+    name: "Бекон",
+    value: "bacon",
+  },
+  {
+    name: "Лук",
+    value: "onion",
+  },
+  {
+    name: "Чили",
+    value: "chile",
+  },
+  {
+    name: "Халапеньо",
+    value: "jalapeno",
+  },
+  {
+    name: "Маслины",
+    value: "olives",
+  },
+  {
+    name: "Томаты",
+    value: "tomatoes",
+  },
+  {
+    name: "Лосось",
+    value: "salmon",
+  },
+  {
+    name: "Моцарелла",
+    value: "mozzarella",
+  },
+  {
+    name: "Пармезан",
+    value: "parmesan",
+  },
+  {
+    name: "Блю чиз",
+    value: "blue_cheese",
+  },
+];

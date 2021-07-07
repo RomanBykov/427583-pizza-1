@@ -97,10 +97,3 @@ export const PIZZA_INGREDIENTS = [
     value: "blue_cheese",
   },
 ];
-
-export const PizzaPart = {
-  DOUGH: "dough",
-  INGREDIENTS: "ingredients",
-  SAUCES: "sauces",
-  SIZES: "sizes",
-};

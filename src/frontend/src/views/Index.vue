@@ -11,7 +11,7 @@
             <div class="sheet__content dough">
               <label
                 class="dough__input"
-                v-for="dough in doughOptions"
+                v-for="dough in normalizedPizza.dough"
                 :key="dough.type"
                 :class="`dough__input--${dough.type}`"
               >
@@ -36,7 +36,7 @@
             <div class="sheet__content diameter">
               <label
                 class="diameter__input"
-                v-for="size in sizes"
+                v-for="size in normalizedPizza.sizes"
                 :key="size.type"
                 :class="`diameter__input--${size.type}`"
               >
@@ -64,7 +64,7 @@
 
                 <label
                   class="radio ingridients__input"
-                  v-for="sauce in sauces"
+                  v-for="sauce in normalizedPizza.sauces"
                   :key="sauce.type"
                 >
                   <input
@@ -83,7 +83,7 @@
                 <ul class="ingridients__list">
                   <li
                     class="ingridients__item"
-                    v-for="ingredient in ingredients"
+                    v-for="ingredient in normalizedPizza.ingredients"
                     :key="ingredient.type"
                   >
                     <span
@@ -157,21 +157,12 @@
 
 <script>
 import pizza from "@/static/pizza.json";
-import {
-  PIZZA_DOUGH_OPTIONS,
-  PIZZA_SIZES,
-  PIZZA_SAUCES,
-  PIZZA_INGREDIENTS,
-} from "@/common/constants";
-import { normalizePizzaPart } from "@/common/utils";
+import { normalizePizza } from "@/common/utils";
 
 export default {
   data() {
     return {
-      doughOptions: normalizePizzaPart(pizza.dough, PIZZA_DOUGH_OPTIONS),
-      sizes: normalizePizzaPart(pizza.sizes, PIZZA_SIZES),
-      sauces: normalizePizzaPart(pizza.sauces, PIZZA_SAUCES),
-      ingredients: normalizePizzaPart(pizza.ingredients, PIZZA_INGREDIENTS),
+      normalizedPizza: normalizePizza(pizza),
     };
   },
 };

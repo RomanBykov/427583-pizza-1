@@ -9,6 +9,11 @@ export const PIZZA_DOUGH_OPTIONS = [
   },
 ];
 
+export const DoughType = {
+  LIGHT: "small",
+  LARGE: "big",
+};
+
 export const PIZZA_SIZES = [
   {
     name: "23 см",
@@ -97,3 +102,13 @@ export const PIZZA_INGREDIENTS = [
     value: "blue_cheese",
   },
 ];
+
+export const PIZZA_DEFAULT = {
+  dough: "light",
+  sauce: "tomato",
+  size: "normal",
+};
+
+export const DATA_TRANSFER_PAYLOAD = "payload";
+
+export const MOVE = "move";

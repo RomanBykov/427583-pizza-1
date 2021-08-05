@@ -107,6 +107,8 @@ export const PIZZA_DEFAULT = {
   dough: "light",
   sauce: "tomato",
   size: "normal",
+  name: "",
+  ingredients: [],
 };
 
 export const DATA_TRANSFER_PAYLOAD = "payload";

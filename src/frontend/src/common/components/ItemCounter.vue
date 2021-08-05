@@ -2,7 +2,8 @@
   <div class="counter counter--orange ingredients__counter">
     <button
       type="button"
-      class="counter__button counter__button--disabled counter__button--minus"
+      class="counter__button counter__button--minus"
+      :class="{ 'counter__button--disabled': count === 0 }"
       @click="decrease"
     >
       <span class="visually-hidden">Меньше</span>
@@ -17,6 +18,7 @@
     <button
       type="button"
       class="counter__button counter__button--plus"
+      :class="{ 'counter__button--disabled': count === 3 }"
       @click="increase"
     >
       <span class="visually-hidden">Больше</span>
@@ -32,9 +34,6 @@ export default {
     };
   },
   methods: {
-    updateCount() {
-      this.$emit("updateCount", this.count);
-    },
     decrease() {
       if (this.count === 0) {
         return;
@@ -50,6 +49,9 @@ export default {
 
       this.count++;
       this.updateCount();
+    },
+    updateCount() {
+      this.$emit("update-count", this.count);
     },
   },
 };

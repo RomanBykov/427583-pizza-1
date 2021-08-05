@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     updateSize(size) {
-      this.$emit("updateSize", size);
+      this.$emit("update-size", size);
     },
   },
 };

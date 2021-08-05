@@ -12,13 +12,18 @@
     </label>
 
     <div class="content__constructor">
-      <div :class="`pizza pizza--foundation--${dough}-${pizza.sauce}`">
-        <div class="pizza__wrapper">
-          <div class="pizza__filling pizza__filling--ananas"></div>
-          <div class="pizza__filling pizza__filling--bacon"></div>
-          <div class="pizza__filling pizza__filling--cheddar"></div>
+      <AppDrop @drop="moveIngredient">
+        <div :class="`pizza pizza--foundation--${dough}-${pizza.sauce}`">
+          <div class="pizza__wrapper">
+            <div
+              class="pizza__filling"
+              v-for="(filling, idx) in fillings"
+              :key="idx"
+              :class="filling"
+            ></div>
+          </div>
         </div>
-      </div>
+      </AppDrop>
     </div>
 
     <BuilderPriceCounter />
@@ -27,16 +32,24 @@
 
 <script>
 import { PIZZA_DEFAULT } from "@/common/constants";
-import BuilderPriceCounter from "./BuilderPriceCounter.vue";
+import BuilderPriceCounter from "./BuilderPriceCounter";
+import AppDrop from "@/common/components/AppDrop";
 
 const DoughType = {
   LIGHT: "small",
   LARGE: "big",
 };
 
+const FillingModificator = {
+  1: "",
+  2: " pizza__filling--second",
+  3: " pizza__filling--third",
+};
+
 export default {
   components: {
     BuilderPriceCounter,
+    AppDrop,
   },
   props: {
     pizza: {
@@ -48,6 +61,19 @@ export default {
     dough() {
       return DoughType[this.pizza.dough.toUpperCase()];
     },
+    fillings() {
+      const fillingsClasses = [];
+
+      this.pizza.ingredients.forEach((ingredient) => {
+        fillingsClasses.push(
+          `pizza__filling--${ingredient.type}${
+            FillingModificator[ingredient.count]
+          }`
+        );
+      });
+
+      return fillingsClasses;
+    },
   },
   data() {
     return {
@@ -56,7 +82,10 @@ export default {
   },
   methods: {
     updateName() {
-      this.$emit("updateName", this.pizzaName);
+      this.$emit("update-name", this.pizzaName);
+    },
+    moveIngredient(ingredient) {
+      this.$emit("update-ingredient-count", ingredient);
     },
   },
 };

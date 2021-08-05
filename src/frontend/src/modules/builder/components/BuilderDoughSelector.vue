@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     updateDough(selected) {
-      this.$emit("updateDough", selected);
+      this.$emit("update-dough", selected);
     },
   },
 };

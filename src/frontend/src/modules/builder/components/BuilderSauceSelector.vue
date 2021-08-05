@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     updateSauce(sauce) {
-      this.$emit("updateSauce", sauce);
+      this.$emit("update-sauce", sauce);
     },
   },
 };

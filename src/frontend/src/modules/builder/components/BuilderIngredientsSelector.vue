@@ -4,23 +4,18 @@
       <h2 class="title title--small sheet__title">Выберите ингридиенты</h2>
 
       <div class="sheet__content ingredients">
-        <BuilderSauceSelector :sauces="sauces" @updateSauce="updateSauce" />
+        <BuilderSauceSelector :sauces="sauces" @update-sauce="updateSauce" />
 
         <div class="ingredients__filling">
           <p>Начинка:</p>
 
           <ul class="ingredients__list">
-            <li
-              class="ingredients__item"
+            <BuilderIngredientsItem
               v-for="ingredient in ingredients"
               :key="ingredient.type"
-            >
-              <span class="filling" :class="`filling--${ingredient.type}`">{{
-                ingredient.name
-              }}</span>
-
-              <ItemCounter @updateCount="updateCount" />
-            </li>
+              :ingredient="ingredient"
+              @update-ingredient-count="updateIngredientCount"
+            />
           </ul>
         </div>
       </div>
@@ -29,12 +24,12 @@
 </template>
 
 <script>
-import ItemCounter from "@/common/components/ItemCounter";
+import BuilderIngredientsItem from "./BuilderIngredientsItem";
 import BuilderSauceSelector from "./BuilderSauceSelector";
 
 export default {
   components: {
-    ItemCounter,
+    BuilderIngredientsItem,
     BuilderSauceSelector,
   },
   props: {
@@ -49,10 +44,10 @@ export default {
   },
   methods: {
     updateSauce(sauce) {
-      this.$emit("updateSauce", sauce);
+      this.$emit("update-sauce", sauce);
     },
-    updateCount() {
-      this.$emit("updateCount");
+    updateIngredientCount(ingredient) {
+      this.$emit("update-ingredient-count", ingredient);
     },
   },
 };

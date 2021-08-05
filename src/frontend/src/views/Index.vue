@@ -5,15 +5,20 @@
         <h1 class="title title--big">Конструктор пиццы</h1>
         <BuilderDoughSelector
           :doughOptions="doughOptions"
-          @updateDough="updateDough"
+          @update-dough="updateDough"
         />
         <BuilderSizeSelector :sizes="sizes" @updateSize="updateSize" />
         <BuilderIngredientsSelector
           :sauces="sauces"
           :ingredients="ingredients"
-          @updateSauce="updateSauce"
+          @update-sauce="updateSauce"
+          @update-ingredient-count="updateIngredientCount"
         />
-        <BuilderPizzaView :pizza="pizza" @updateName="updateName" />
+        <BuilderPizzaView
+          :pizza="pizza"
+          @update-name="updateName"
+          @update-ingredient-count="updateIngredientCount"
+        />
       </div>
     </form>
   </main>
@@ -47,7 +52,7 @@ export default {
       sizes: normalizePizzaSizes(pizza.sizes),
       sauces: normalizePizzaSauces(pizza.sauces),
       ingredients: normalizePizzaIngredients(pizza.ingredients),
-      pizza: Object.assign({}, PIZZA_DEFAULT, { name: "" }),
+      pizza: Object.assign({}, PIZZA_DEFAULT),
     };
   },
   methods: {
@@ -62,6 +67,16 @@ export default {
     },
     updateName(name) {
       this.pizza.name = name;
+    },
+    updateIngredientCount(ingredient) {
+      this.pizza.ingredients = this.pizza.ingredients.filter(
+        (item) => item.type !== ingredient.type
+      );
+
+      this.pizza.ingredients.push({
+        type: ingredient.type,
+        count: ingredient.count,
+      });
     },
   },
 };

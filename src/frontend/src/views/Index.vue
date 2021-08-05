@@ -73,6 +73,10 @@ export default {
         (item) => item.type !== ingredient.type
       );
 
+      if (ingredient.count === 0) {
+        return;
+      }
+
       this.pizza.ingredients.push({
         type: ingredient.type,
         count: ingredient.count,

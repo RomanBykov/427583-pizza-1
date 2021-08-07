@@ -7,7 +7,7 @@
           :doughOptions="doughOptions"
           @update-dough="updateDough"
         />
-        <BuilderSizeSelector :sizes="sizes" @updateSize="updateSize" />
+        <BuilderSizeSelector :sizes="sizes" @update-size="updateSize" />
         <BuilderIngredientsSelector
           :sauces="sauces"
           :ingredients="ingredients"
@@ -16,8 +16,10 @@
         />
         <BuilderPizzaView
           :pizza="pizza"
+          :price="price"
           @update-name="updateName"
           @update-ingredient-count="updateIngredientCount"
+          @make-pizza="makePizza"
         />
       </div>
     </form>
@@ -46,6 +48,26 @@ export default {
     BuilderIngredientsSelector,
     BuilderPizzaView,
   },
+  computed: {
+    doughPrice() {
+      return this.getPizzaParamByType(this.doughOptions, "dough", "price");
+    },
+    saucePrice() {
+      return this.getPizzaParamByType(this.sauces, "sauce", "price");
+    },
+    multiplier() {
+      return this.getPizzaParamByType(this.sizes, "size", "multiplier");
+    },
+    ingredientsPrice() {
+      return this.pizza.ingredients.reduce((totalCost, ingredient) => {
+        const price = this.ingredients.find(
+          (item) => item.type === ingredient.type
+        ).price;
+
+        return (totalCost += price * ingredient.count);
+      }, 0);
+    },
+  },
   data() {
     return {
       doughOptions: normalizePizzaDough(pizza.dough),
@@ -53,9 +75,26 @@ export default {
       sauces: normalizePizzaSauces(pizza.sauces),
       ingredients: normalizePizzaIngredients(pizza.ingredients),
       pizza: Object.assign({}, PIZZA_DEFAULT),
+      price: 0,
+      isReadyForSend: false,
     };
   },
+  watch: {
+    pizza: {
+      deep: true,
+      handler() {
+        this.price =
+          (this.doughPrice + this.saucePrice + this.ingredientsPrice) *
+          this.multiplier;
+      },
+    },
+  },
   methods: {
+    getPizzaParamByType(pizzaParts, partsType, paramName) {
+      return pizzaParts.find((item) => item.type === this.pizza[partsType])[
+        paramName
+      ];
+    },
     updateDough(dough) {
       this.pizza.dough = dough;
     },
@@ -81,6 +120,9 @@ export default {
         type: ingredient.type,
         count: ingredient.count,
       });
+    },
+    makePizza() {
+      console.log("Начнём готовить, когда появится axios!");
     },
   },
 };

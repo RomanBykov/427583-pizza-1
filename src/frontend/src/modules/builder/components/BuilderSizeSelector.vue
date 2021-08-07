@@ -12,7 +12,7 @@
         >
           <RadioButton
             class="visually-hidden"
-            :name="'diameter'"
+            name="diameter"
             :value="size.type"
             :checked="defaultSize"
             @update="updateSize"

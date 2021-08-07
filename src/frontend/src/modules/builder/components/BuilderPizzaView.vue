@@ -26,7 +26,12 @@
       </AppDrop>
     </div>
 
-    <BuilderPriceCounter />
+    <BuilderPriceCounter
+      :price="price"
+      :hasName="hasName"
+      :hasIngredients="hasIngredients"
+      @make-pizza="makePizza"
+    />
   </div>
 </template>
 
@@ -56,6 +61,10 @@ export default {
       type: Object,
       default: PIZZA_DEFAULT,
     },
+    price: {
+      type: Number,
+      required: true,
+    },
   },
   computed: {
     dough() {
@@ -74,6 +83,12 @@ export default {
 
       return fillingsClasses;
     },
+    hasName() {
+      return !!this.pizzaName;
+    },
+    hasIngredients() {
+      return this.pizza.ingredients.length > 0;
+    },
   },
   data() {
     return {
@@ -86,6 +101,9 @@ export default {
     },
     moveIngredient(ingredient) {
       this.$emit("update-ingredient-count", ingredient);
+    },
+    makePizza() {
+      this.$emit("make-pizza");
     },
   },
 };

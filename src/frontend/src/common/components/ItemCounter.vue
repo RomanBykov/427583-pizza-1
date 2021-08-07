@@ -1,9 +1,10 @@
 <template>
-  <div class="counter counter--orange ingredients__counter">
+  <div class="counter counter--orange" :class="classes">
     <button
       type="button"
       class="counter__button counter__button--minus"
-      :class="{ 'counter__button--disabled': count === 0 }"
+      :class="{ 'counter__button--disabled': isMin }"
+      :disabled="isMin"
       @click="decrease"
     >
       <span class="visually-hidden">Меньше</span>
@@ -13,12 +14,14 @@
       name="counter"
       class="counter__input"
       v-model="count"
-      @change="updateCount"
+      @keypress="testKey($event)"
+      @blur="resetIfEmpty"
     />
     <button
       type="button"
       class="counter__button counter__button--plus"
-      :class="{ 'counter__button--disabled': count === 3 }"
+      :class="{ 'counter__button--disabled': isMax }"
+      :disabled="isMax"
       @click="increase"
     >
       <span class="visually-hidden">Больше</span>
@@ -27,31 +30,77 @@
 </template>
 
 <script>
+const DigitKey = {
+  NUMBER_ZERO: 48,
+  NUMBER_NINE: 57,
+};
+
 export default {
+  props: {
+    max: {
+      type: Number,
+      default: Infinity,
+    },
+    min: {
+      type: Number,
+      default: 0,
+    },
+    classes: {
+      type: String,
+      default: "",
+    },
+  },
+  computed: {
+    isMin() {
+      return this.count <= this.min;
+    },
+    isMax() {
+      return this.count >= this.max;
+    },
+  },
   data() {
     return {
       count: 0,
     };
   },
+  watch: {
+    count() {
+      this.updateCount();
+    },
+  },
   methods: {
-    decrease() {
-      if (this.count === 0) {
-        return;
+    testKey($event) {
+      let keyCode = $event.keyCode;
+
+      if (keyCode < DigitKey.NUMBER_ZERO || keyCode > DigitKey.NUMBER_NINE) {
+        return $event.preventDefault();
       }
 
-      this.count--;
-      this.updateCount();
+      this.count = null;
+    },
+    resetIfEmpty() {
+      if (!this.count) {
+        this.count = this.min;
+      }
+    },
+    decrease() {
+      if (!this.isMin) {
+        this.count--;
+      }
     },
     increase() {
-      if (this.count === 3) {
-        return;
+      if (!this.isMax) {
+        this.count++;
       }
-
-      this.count++;
-      this.updateCount();
     },
     updateCount() {
-      this.$emit("update-count", this.count);
+      if (this.count !== null) {
+        if (this.count > this.max) {
+          this.count = this.max;
+        }
+
+        this.$emit("update-count", this.count);
+      }
     },
   },
 };

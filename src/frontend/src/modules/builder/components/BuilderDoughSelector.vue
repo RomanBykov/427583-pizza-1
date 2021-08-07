@@ -12,7 +12,7 @@
         >
           <RadioButton
             class="visually-hidden"
-            :name="'dough'"
+            name="dough"
             :value="dough.type"
             :checked="defaultDough"
             @update="updateDough"

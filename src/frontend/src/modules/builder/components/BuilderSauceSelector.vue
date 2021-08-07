@@ -8,7 +8,7 @@
       :key="sauce.type"
     >
       <RadioButton
-        :name="'sauce'"
+        name="sauce"
         :value="sauce.type"
         :checked="defaultSauce"
         @update="updateSauce"

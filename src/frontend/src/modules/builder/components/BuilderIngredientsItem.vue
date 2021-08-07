@@ -1,18 +1,30 @@
 <template>
   <li class="ingredients__item">
-    <AppDrag :transferData="{ type: ingredient.type, count: count }">
+    <AppDrag
+      :isDraggable="isDraggable"
+      :transferData="{ type: ingredient.type, count: count }"
+    >
       <span class="filling" :class="`filling--${ingredient.type}`">{{
         ingredient.name
       }}</span>
     </AppDrag>
 
-    <ItemCounter @update-count="updateCount" />
+    <ItemCounter
+      :classes="'ingredients__counter'"
+      :max="maxCount"
+      @update-count="updateCount"
+    />
   </li>
 </template>
 
 <script>
 import AppDrag from "@/common/components/AppDrag";
 import ItemCounter from "@/common/components/ItemCounter";
+
+const IngredientCount = {
+  MIN: 0,
+  MAX: 3,
+};
 
 export default {
   components: {
@@ -25,9 +37,17 @@ export default {
       required: true,
     },
   },
+  computed: {
+    isDraggable() {
+      return (
+        this.count > IngredientCount.MIN && this.count <= IngredientCount.MAX
+      );
+    },
+  },
   data() {
     return {
       count: 0,
+      maxCount: IngredientCount.MAX,
     };
   },
   methods: {

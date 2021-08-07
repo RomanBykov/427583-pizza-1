@@ -3,8 +3,8 @@
     type="radio"
     :name="name"
     :value="value"
-    v-model="selected"
-    @change="update"
+    :checked="isChecked"
+    @change="$emit('update', $event.target.value)"
   />
 </template>
 
@@ -24,17 +24,9 @@ export default {
       default: "",
     },
   },
-  data() {
-    return {
-      selected: false,
-    };
-  },
-  mounted() {
-    this.selected = this.checked;
-  },
-  methods: {
-    update() {
-      this.$emit("update", this.selected);
+  computed: {
+    isChecked() {
+      return this.value === this.checked;
     },
   },
 };

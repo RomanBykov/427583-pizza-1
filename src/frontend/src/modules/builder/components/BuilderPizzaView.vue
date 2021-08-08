@@ -52,6 +52,7 @@ const FillingModificator = {
 };
 
 export default {
+  name: "BuilderPizzaView",
   components: {
     BuilderPriceCounter,
     AppDrop,

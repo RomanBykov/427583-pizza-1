@@ -28,6 +28,7 @@ import BuilderIngredientsItem from "./BuilderIngredientsItem";
 import BuilderSauceSelector from "./BuilderSauceSelector";
 
 export default {
+  name: "BuilderIngredientsSelector",
   components: {
     BuilderIngredientsItem,
     BuilderSauceSelector,

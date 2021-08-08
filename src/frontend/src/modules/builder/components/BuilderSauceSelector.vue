@@ -23,6 +23,7 @@ import { PIZZA_DEFAULT } from "@/common/constants";
 import RadioButton from "@/common/components/RadioButton";
 
 export default {
+  name: "BuilderSauceSelector",
   components: {
     RadioButton,
   },

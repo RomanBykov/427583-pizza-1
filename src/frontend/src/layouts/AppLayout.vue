@@ -1,5 +1,5 @@
 <template>
-  <component :is="layout">
+  <component :is="layout" @login="login" :isAuthorized="isAuthorized">
     <slot />
   </component>
 </template>
@@ -13,6 +13,16 @@ export default {
     layout() {
       const layout = this.$route.meta.layout || DEFAULT_LAYOUT;
       return () => import(`@/layouts/${layout}`);
+    },
+  },
+  data() {
+    return {
+      isAuthorized: false,
+    };
+  },
+  methods: {
+    login() {
+      this.isAuthorized = true;
     },
   },
 };

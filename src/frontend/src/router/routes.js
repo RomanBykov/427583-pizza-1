@@ -9,7 +9,7 @@ export default [
     path: "/login",
     name: "Login",
     component: () => import("../views/Login.vue"),
-    meta: { layout: "AppLayoutDefault" },
+    meta: { layout: "AppLayoutEmpty" },
   },
   {
     path: "/cart",
@@ -21,12 +21,12 @@ export default [
     path: "/profile",
     name: "Profile",
     component: () => import("../views/Profile.vue"),
-    meta: { layout: "AppLayoutDefault" },
+    meta: { layout: "AppLayoutMain" },
   },
   {
     path: "/orders",
     name: "Orders",
     component: () => import("../views/Orders.vue"),
-    meta: { layout: "AppLayoutDefault" },
+    meta: { layout: "AppLayoutMain" },
   },
 ];

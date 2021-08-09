@@ -14,6 +14,7 @@ import AppLayoutHeader from "@/layouts/AppLayoutHeader";
 import AppLayoutMainSidebar from "@/layouts/AppLayoutMainSidebar";
 
 export default {
+  name: "AppLayoutMain",
   components: {
     AppLayoutHeader,
     AppLayoutMainSidebar,

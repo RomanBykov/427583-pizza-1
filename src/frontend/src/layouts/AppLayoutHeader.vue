@@ -49,6 +49,7 @@
 
 <script>
 export default {
+  name: "AppLayoutHeader",
   props: {
     isAuthorized: {
       type: Boolean,

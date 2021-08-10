@@ -42,6 +42,7 @@ import BuilderIngredientsSelector from "@/modules/builder/components/BuilderIngr
 import BuilderPizzaView from "@/modules/builder/components/BuilderPizzaView";
 
 export default {
+  name: "AppIndex",
   components: {
     BuilderDoughSelector,
     BuilderSizeSelector,
@@ -67,6 +68,12 @@ export default {
         return (totalCost += price * ingredient.count);
       }, 0);
     },
+    totalPrice() {
+      return (
+        (this.doughPrice + this.saucePrice + this.ingredientsPrice) *
+        this.multiplier
+      );
+    },
   },
   data() {
     return {
@@ -83,9 +90,7 @@ export default {
     pizza: {
       deep: true,
       handler() {
-        this.price =
-          (this.doughPrice + this.saucePrice + this.ingredientsPrice) *
-          this.multiplier;
+        this.price = this.totalPrice;
       },
     },
   },

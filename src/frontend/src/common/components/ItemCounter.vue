@@ -36,6 +36,7 @@ const DigitKey = {
 };
 
 export default {
+  name: "ItemCounter",
   props: {
     max: {
       type: Number,

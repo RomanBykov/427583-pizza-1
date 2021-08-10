@@ -27,6 +27,7 @@ const IngredientCount = {
 };
 
 export default {
+  name: "BuilderIngredientsItem",
   components: {
     AppDrag,
     ItemCounter,

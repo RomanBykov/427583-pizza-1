@@ -1,19 +1,29 @@
 <template>
-  <div class="app-layout">
-    <AppHeader />
-    <AppIndex />
-  </div>
+  <component :is="layout" @login="login" :isAuthorized="isAuthorized">
+    <slot />
+  </component>
 </template>
 
 <script>
-import AppHeader from "@/components/AppHeader";
-import AppIndex from "@/views/Index.vue";
+const DEFAULT_LAYOUT = "AppLayoutDefault";
 
 export default {
   name: "AppLayout",
-  components: {
-    AppHeader,
-    AppIndex,
+  computed: {
+    layout() {
+      const layout = this.$route.meta.layout || DEFAULT_LAYOUT;
+      return () => import(`@/layouts/${layout}`);
+    },
+  },
+  data() {
+    return {
+      isAuthorized: false,
+    };
+  },
+  methods: {
+    login() {
+      this.isAuthorized = true;
+    },
   },
 };
 </script>
